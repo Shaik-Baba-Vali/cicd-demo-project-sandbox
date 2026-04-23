@@ -6,15 +6,16 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Business Group ID -->
+    <!-- Use Business Group ID -->
     <groupId>3265c39d-1b19-4158-828c-58479d052eea</groupId>
     <artifactId>cicd-demo-project-sandbox</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
 
-    <!-- 🔥 REQUIRED for Exchange -->
+    <!-- REQUIRED for Exchange -->
     <name>cicd-demo-project-sandbox</name>
 
+    <!-- ================= PROPERTIES ================= -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -25,56 +26,71 @@
         <skipMunitTests>true</skipMunitTests>
     </properties>
 
+    <!-- ================= BUILD ================= -->
     <build>
         <plugins>
 
+            <!-- Mule Maven Plugin -->
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
 
-                <configuration>
+                <executions>
+                    <execution>
+                        <id>deploy-to-cloudhub2</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
 
-                    <muleVersion>${app.runtime}</muleVersion>
-                    <skipMunitTests>${skipMunitTests}</skipMunitTests>
+                        <configuration>
 
-                    <cloudhub2Deployment>
+                            <muleVersion>${app.runtime}</muleVersion>
+                            <skipMunitTests>${skipMunitTests}</skipMunitTests>
 
-                        <uri>https://anypoint.mulesoft.com</uri>
-                        <provider>MC</provider>
+                            <cloudhub2Deployment>
 
-                        <!-- App -->
-                        <applicationName>${project.artifactId}</applicationName>
+                                <!-- Anypoint -->
+                                <uri>https://anypoint.mulesoft.com</uri>
+                                <provider>MC</provider>
 
-                        <!-- ⚠️ Must match Anypoint exactly -->
-                        <environment>Sandbox</environment>
+                                <!-- App -->
+                                <applicationName>${project.artifactId}</applicationName>
 
-                        <!-- Region -->
-                        <target>Cloudhub-US-East-2</target>
+                                <!-- MUST match exactly -->
+                                <environment>Sandbox</environment>
 
-                        <!-- Resources -->
-                        <replicas>1</replicas>
-                        <vCores>0.1</vCores>
+                                <!-- Region -->
+                                <target>Cloudhub-US-East-2</target>
 
-                        <!-- Org -->
-                        <businessGroupId>${project.groupId}</businessGroupId>
+                                <!-- Resources -->
+                                <replicas>1</replicas>
+                                <vCores>0.1</vCores>
 
-                        <!-- 🔥 FIXED AUTH (matches Jenkins) -->
-                        <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
-                        <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
-                        <connectedAppGrantType>client_credentials</connectedAppGrantType>
+                                <!-- Org -->
+                                <businessGroupId>${project.groupId}</businessGroupId>
 
-                    </cloudhub2Deployment>
+                                <!-- AUTH (matches Jenkins params) -->
+                                <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
+                                <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
+                                <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-                </configuration>
+                            </cloudhub2Deployment>
+
+                        </configuration>
+                    </execution>
+                </executions>
+
             </plugin>
 
         </plugins>
     </build>
 
-    <!-- Dependencies -->
+    <!-- ================= DEPENDENCIES ================= -->
     <dependencies>
+
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
@@ -88,10 +104,12 @@
             <version>1.2.7</version>
             <classifier>mule-plugin</classifier>
         </dependency>
+
     </dependencies>
 
-    <!-- Repositories -->
+    <!-- ================= REPOSITORIES ================= -->
     <repositories>
+
         <repository>
             <id>anypoint-exchange-v3</id>
             <name>Anypoint Exchange</name>
@@ -103,18 +121,23 @@
             <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </repository>
+
     </repositories>
 
+    <!-- ================= PLUGIN REPOSITORIES ================= -->
     <pluginRepositories>
+
         <pluginRepository>
             <id>mulesoft-releases</id>
             <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </pluginRepository>
+
     </pluginRepositories>
 
-    <!-- Required for Exchange -->
+    <!-- ================= DISTRIBUTION MANAGEMENT ================= -->
     <distributionManagement>
+
         <repository>
             <id>anypoint-exchange-v3</id>
             <name>Anypoint Exchange</name>
@@ -122,6 +145,7 @@
                 https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven
             </url>
         </repository>
+
     </distributionManagement>
 
 </project>
