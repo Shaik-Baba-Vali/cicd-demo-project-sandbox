@@ -24,7 +24,7 @@ pipeline {
             steps {
                 bat """
                     mvn clean package ^
-                    -DskipMunitTests ^
+                    -DskipTests ^
                     -s settings.xml
                 """
             }
@@ -33,11 +33,9 @@ pipeline {
         stage('Deploy to CloudHub 2.0') {
             steps {
                 bat """
-                    mvn clean deploy -DmuleDeploy ^
+                    mvn clean deploy ^
                     -DconnectedApp.clientId=%CLIENT_ID% ^
                     -DconnectedApp.clientSecret=%CLIENT_SECRET% ^
-                    -Dcloudhub2.environment=Sandbox ^
-                    -Dcloudhub2.target=Cloudhub-US-East-2^
                     -s settings.xml
                 """
             }
