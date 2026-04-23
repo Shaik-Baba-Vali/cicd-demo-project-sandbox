@@ -27,6 +27,11 @@
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
 
+                <!-- 🔥 REQUIRED FIX -->
+                <configuration>
+                    <classifier>mule-application</classifier>
+                </configuration>
+
                 <executions>
                     <execution>
                         <id>deploy-to-ch2</id>
@@ -67,7 +72,6 @@
         </plugins>
     </build>
 
-    <!-- 🔥 REQUIRED FOR EXCHANGE -->
     <distributionManagement>
         <repository>
             <id>anypoint-exchange-v3</id>
