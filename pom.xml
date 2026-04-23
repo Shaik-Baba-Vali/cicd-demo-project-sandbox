@@ -21,56 +21,46 @@
 
     <!-- ================= BUILD ================= -->
     <build>
-        <plugins>
-
-            <plugin>
-                <groupId>org.mule.tools.maven</groupId>
-                <artifactId>mule-maven-plugin</artifactId>
-                <version>${mule.maven.plugin.version}</version>
-                <extensions>true</extensions>
-
-                <!-- 🔥 THIS IS THE FIX -->
-                <executions>
-                    <execution>
-                        <id>deploy-to-ch2</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-
-                        <configuration>
-
-                            <cloudHub2Deployment>
-                                <uri>https://anypoint.mulesoft.com</uri>
-
-                                <provider>Connected App</provider>
-
-                                <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
-                                <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
-                                <connectedAppGrantType>client_credentials</connectedAppGrantType>
-
-                                <businessGroupId>${business.group.id}</businessGroupId>
-
-                                <environment>${cloudhub2.environment}</environment>
-                                <applicationName>${project.artifactId}</applicationName>
-                                <muleVersion>${app.runtime}</muleVersion>
-
-                                <region>us-east-2</region>
-
-                                <vCores>0.1</vCores>
-                                <replicas>1</replicas>
-
-                            </cloudHub2Deployment>
-
-                            <skipMunitTests>true</skipMunitTests>
-
-                        </configuration>
-
-                    </execution>
-                </executions>
-
-            </plugin>
-
+        <plugin>
+             <groupId>org.mule.tools.maven</groupId>
+             <artifactId>mule-maven-plugin</artifactId>
+             <version>4.10.0</version>
+             <extensions>true</extensions>
+         
+             <executions>
+                 <execution>
+                     <id>deploy-to-ch2</id>
+                     <phase>deploy</phase>
+                     <goals>
+                         <goal>deploy</goal>
+                     </goals>
+         
+                     <configuration>
+                         <cloudHub2Deployment>
+                             <uri>https://anypoint.mulesoft.com</uri>
+         
+                             <provider>MC</provider>
+         
+                             <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
+                             <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
+                             <connectedAppGrantType>client_credentials</connectedAppGrantType>
+         
+                             <businessGroupId>${business.group.id}</businessGroupId>
+         
+                             <environment>${cloudhub2.environment}</environment>
+                             <target>Cloudhub-US-East-2</target>
+         
+                             <applicationName>${project.artifactId}</applicationName>
+                             <muleVersion>${app.runtime}</muleVersion>
+         
+                             <replicas>1</replicas>
+                             <vCores>0.1</vCores>
+                         </cloudHub2Deployment>
+                     </configuration>
+         
+                 </execution>
+             </executions>
+         </plugin>
         </plugins>
     </build>
 
