@@ -37,7 +37,7 @@ pipeline {
                     -DconnectedApp.clientId=%CLIENT_ID% ^
                     -DconnectedApp.clientSecret=%CLIENT_SECRET% ^
                     -Dcloudhub2.environment=Sandbox ^
-                    -Dcloudhub2.target=CloudHub 2.0 ^
+                    -Dcloudhub2.target=Cloudhub-US-East-2^
                     -s settings.xml
                 """
             }
