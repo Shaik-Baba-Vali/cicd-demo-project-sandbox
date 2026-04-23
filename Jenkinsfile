@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy to CloudHub 2.0') {
             steps {
                 bat """
-                    mvn clean deploy ^
+                    mvn clean deploy -DmuleDeploy ^
                     -DconnectedApp.clientId=%CLIENT_ID% ^
                     -DconnectedApp.clientSecret=%CLIENT_SECRET% ^
                     -s settings.xml
