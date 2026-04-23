@@ -10,7 +10,7 @@ pipeline {
     environment {
         CLIENT_ID     = credentials('ANYPOINT_CLIENT_ID')
         CLIENT_SECRET = credentials('ANYPOINT_CLIENT_SECRET')
-        BG_ID         = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'  // paste your Business Group ID here
+        BG_ID         = '3265c39d-1b19-4158-828c-58479d052eea'  // paste your Business Group ID here
     }
 
     stages {
