@@ -10,8 +10,6 @@ pipeline {
     environment {
         CLIENT_ID     = credentials('ANYPOINT_CLIENT_ID')
         CLIENT_SECRET = credentials('ANYPOINT_CLIENT_SECRET')
-
-        BG_ID = '3265c39d-1b19-4158-828c-58479d052eea'
     }
 
     stages {
@@ -35,7 +33,7 @@ pipeline {
         stage('Deploy to CloudHub 2.0') {
             steps {
                 bat """
-                    mvn deploy -DmuleDeploy ^
+                    mvn clean deploy -DmuleDeploy ^
                     -DconnectedApp.clientId=%CLIENT_ID% ^
                     -DconnectedApp.clientSecret=%CLIENT_SECRET% ^
                     -Dcloudhub2.environment=Sandbox ^
