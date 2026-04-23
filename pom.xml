@@ -5,25 +5,30 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- 🔥 MUST BE BUSINESS GROUP ID -->
+    <!-- MUST BE ORG ID -->
     <groupId>3265c39d-1b19-4158-828c-58479d052eea</groupId>
 
     <artifactId>cicd-demo-project-sandbox</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
 
+    <!-- ================= PROPERTIES ================= -->
     <properties>
         <app.runtime>4.10.1</app.runtime>
         <mule.maven.plugin.version>4.9.0</mule.maven.plugin.version>
 
         <cloudhub2.environment>Sandbox</cloudhub2.environment>
         <business.group.id>3265c39d-1b19-4158-828c-58479d052eea</business.group.id>
+
+        <!-- 🔥 REQUIRED FOR EXCHANGE -->
+        <exchange.name>cicd-demo-project-sandbox</exchange.name>
+        <exchange.description>CI/CD MuleSoft Demo Project</exchange.description>
     </properties>
 
+    <!-- ================= BUILD ================= -->
     <build>
         <plugins>
 
-            <!-- CloudHub 2 Deployment -->
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
@@ -70,7 +75,9 @@
         </plugins>
     </build>
 
+    <!-- ================= DEPENDENCIES ================= -->
     <dependencies>
+
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
@@ -84,9 +91,12 @@
             <version>1.2.7</version>
             <classifier>mule-plugin</classifier>
         </dependency>
+
     </dependencies>
 
+    <!-- ================= REPOSITORIES ================= -->
     <repositories>
+
         <repository>
             <id>anypoint-exchange-v3</id>
             <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
@@ -96,23 +106,30 @@
             <id>mulesoft-releases</id>
             <url>https://repository.mulesoft.org/releases/</url>
         </repository>
+
     </repositories>
 
+    <!-- ================= PLUGIN REPOSITORIES ================= -->
     <pluginRepositories>
+
         <pluginRepository>
             <id>mulesoft-releases</id>
             <url>https://repository.mulesoft.org/releases/</url>
         </pluginRepository>
+
     </pluginRepositories>
 
+    <!-- ================= DISTRIBUTION MANAGEMENT ================= -->
     <distributionManagement>
+
         <repository>
             <id>anypoint-exchange-v3</id>
-            <name>Anypoint Exchange</name>
+			<name>Anypoint Exchange</name>
             <url>
                 https://maven.anypoint.mulesoft.com/api/v3/organizations/${business.group.id}/maven
             </url>
         </repository>
+
     </distributionManagement>
 
 </project>
