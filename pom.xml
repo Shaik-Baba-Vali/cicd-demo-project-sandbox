@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>3265c39d-1b19-4158-828c-58479d052eea</groupId>
+    <artifactId>cicd-demo-project-sandbox</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>mule-application</packaging>
+
+    <!-- 🔥 THIS FIXES YOUR ERROR -->
+    <name>cicd-demo-project-sandbox</name>
+
+    <properties>
+        <app.runtime>4.10.1</app.runtime>
+        <mule.maven.plugin.version>4.6.1</mule.maven.plugin.version>
+        <skipMunitTests>true</skipMunitTests>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mule.tools.maven</groupId>
+                <artifactId>mule-maven-plugin</artifactId>
+                <version>${mule.maven.plugin.version}</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <muleVersion>${app.runtime}</muleVersion>
+                    <skipMunitTests>${skipMunitTests}</skipMunitTests>
+
+                    <cloudhub2Deployment>
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <provider>MC</provider>
+
+                        <applicationName>${project.artifactId}</applicationName>
+
+                        <!-- ⚠️ Match your actual env -->
+                        <environment>Sandbox</environment>
+
+                        <target>Cloudhub-US-East-2</target>
+
+                        <replicas>1</replicas>
+                        <vCores>0.1</vCores>
+
+                        <businessGroupId>${project.groupId}</businessGroupId>
+
+                        <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
+                        <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
+                        <connectedAppGrantType>client_credentials</connectedAppGrantType>
+                    </cloudhub2Deployment>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mule.connectors</groupId>
+            <artifactId>mule-http-connector</artifactId>
+            <version>1.11.0</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mule.connectors</groupId>
+            <artifactId>mule-sockets-connector</artifactId>
+            <version>1.2.7</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>anypoint-exchange-v3</id>
+            <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+        </repository>
+
+        <repository>
+            <id>mulesoft-releases</id>
+            <url>https://repository.mulesoft.org/releases/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mulesoft-releases</id>
+            <url>https://repository.mulesoft.org/releases/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>anypoint-exchange-v3</id>
+            <url>
+                https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven
+            </url>
+        </repository>
+    </distributionManagement>
+
+</project>
