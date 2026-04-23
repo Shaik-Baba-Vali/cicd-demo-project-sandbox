@@ -39,7 +39,7 @@
 
                 <executions>
                     <execution>
-                        <id>deploy-to-cloudhub2</id>
+                        <id>default-deploy</id>
                         <phase>deploy</phase>
                         <goals>
                             <goal>deploy</goal>
