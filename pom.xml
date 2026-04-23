@@ -13,7 +13,7 @@
     <!-- ================= PROPERTIES ================= -->
     <properties>
         <app.runtime>4.10.1</app.runtime>
-        <mule.maven.plugin.version>4.10.0</mule.maven.plugin.version>
+        <mule.maven.plugin.version>4.9.0</mule.maven.plugin.version>
 
         <cloudhub2.environment>Sandbox</cloudhub2.environment>
         <business.group.id>3265c39d-1b19-4158-828c-58479d052eea</business.group.id>
@@ -39,6 +39,7 @@
 
                         <configuration>
                             <cloudHub2Deployment>
+
                                 <uri>https://anypoint.mulesoft.com</uri>
 
                                 <provider>MC</provider>
@@ -57,6 +58,7 @@
 
                                 <replicas>1</replicas>
                                 <vCores>0.1</vCores>
+
                             </cloudHub2Deployment>
                         </configuration>
 
