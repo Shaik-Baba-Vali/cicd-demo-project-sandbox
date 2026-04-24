@@ -53,7 +53,7 @@
                         <environment>dev</environment>
 
                         <!-- Region -->
-                        <target>Cloudhub-US-East-2</target>
+                        <target>Cloudhub-US-East-1</target>
 
                         <!-- Resources -->
                         <replicas>1</replicas>
