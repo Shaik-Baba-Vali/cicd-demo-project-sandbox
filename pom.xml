@@ -60,7 +60,7 @@
                                 <applicationName>${project.artifactId}</applicationName>
 
                                 <!-- MUST match exactly -->
-                                <environment>Sandbox</environment>
+                                <environment>dev</environment>
 
                                 <!-- Region -->
                                 <target>Cloudhub-US-East-2</target>
