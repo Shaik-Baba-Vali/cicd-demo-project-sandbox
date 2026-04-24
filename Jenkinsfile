@@ -2,6 +2,10 @@ pipeline {
 
     agent any
 
+    triggers {
+        pollSCM('* * * * *')
+    }
+
     tools {
         maven 'Maven'
         jdk 'JDK'
@@ -20,10 +24,10 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build & Publish to Exchange') {
             steps {
                 bat """
-                    mvn clean package ^
+                    mvn clean deploy ^
                     -DskipTests ^
                     -s settings.xml
                 """
@@ -33,7 +37,7 @@ pipeline {
         stage('Deploy to CloudHub 2.0') {
             steps {
                 bat """
-                    mvn clean deploy -DmuleDeploy ^
+                    mvn mule:deploy -DmuleDeploy ^
                     -DconnectedApp.clientId=%CLIENT_ID% ^
                     -DconnectedApp.clientSecret=%CLIENT_SECRET% ^
                     -s settings.xml
@@ -45,13 +49,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Deployment SUCCESS to CloudHub 2.0"
+            echo "✅ Deployment SUCCESS"
         }
         failure {
             echo "❌ Deployment FAILED"
-        }
-        always {
-            cleanWs()
         }
     }
 }
