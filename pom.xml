@@ -37,52 +37,38 @@
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
 
-                <executions>
-                    <execution>
-                        <id>default-deploy</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
+                <configuration>
+                    <muleVersion>${app.runtime}</muleVersion>
+                    <skipMunitTests>${skipMunitTests}</skipMunitTests>
 
-                        <configuration>
+                    <cloudhub2Deployment>
+                        <!-- Anypoint -->
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <provider>MC</provider>
 
-                            <muleVersion>${app.runtime}</muleVersion>
-                            <skipMunitTests>${skipMunitTests}</skipMunitTests>
+                        <!-- App -->
+                        <applicationName>${project.artifactId}</applicationName>
 
-                            <cloudhub2Deployment>
+                        <!-- MUST match exactly -->
+                        <environment>dev</environment>
 
-                                <!-- Anypoint -->
-                                <uri>https://anypoint.mulesoft.com</uri>
-                                <provider>MC</provider>
+                        <!-- Region -->
+                        <target>Cloudhub-US-East-2</target>
 
-                                <!-- App -->
-                                <applicationName>${project.artifactId}</applicationName>
+                        <!-- Resources -->
+                        <replicas>1</replicas>
+                        <vCores>0.1</vCores>
 
-                                <!-- MUST match exactly -->
-                                <environment>dev</environment>
+                        <!-- Org -->
+                        <businessGroupId>${project.groupId}</businessGroupId>
 
-                                <!-- Region -->
-                                <target>Cloudhub-US-East-2</target>
+                        <!-- AUTH (matches Jenkins params) -->
+                        <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
+                        <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
+                        <connectedAppGrantType>client_credentials</connectedAppGrantType>
 
-                                <!-- Resources -->
-                                <replicas>1</replicas>
-                                <vCores>0.1</vCores>
-
-                                <!-- Org -->
-                                <businessGroupId>${project.groupId}</businessGroupId>
-
-                                <!-- AUTH (matches Jenkins params) -->
-                                <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
-                                <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
-                                <connectedAppGrantType>client_credentials</connectedAppGrantType>
-
-                            </cloudhub2Deployment>
-
-                        </configuration>
-                    </execution>
-                </executions>
-
+                    </cloudhub2Deployment>
+                </configuration>
             </plugin>
 
         </plugins>
