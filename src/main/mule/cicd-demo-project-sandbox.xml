@@ -10,6 +10,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	</http:listener-config>
 	<flow name="cicd-demo-project-sandboxFlow" doc:id="fe8ffb11-b53a-440f-a60d-c01e1de6dcca" >
 		<http:listener doc:name="Listener" doc:id="5d7f372b-fbd5-4dc9-a5f5-2c58991a43ef" config-ref="HTTP_Listener_config" path="/cicd"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c2e46cfe-977a-4407-95a1-259b9218588d" message='#["started successfully"]'/>
 		<ee:transform doc:name="Transform Message" doc:id="cc2fd7bd-f12f-4348-8620-599fbfaae363">
 			<ee:message>
 				<ee:set-payload><![CDATA[%dw 2.0
