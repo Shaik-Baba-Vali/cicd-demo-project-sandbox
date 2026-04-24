@@ -2,10 +2,6 @@ pipeline {
 
     agent any
 
-    triggers {
-        pollSCM('* * * * *')
-    }
-
     tools {
         maven 'Maven'
         jdk 'JDK'
@@ -53,6 +49,9 @@ pipeline {
         }
         failure {
             echo "❌ Deployment FAILED"
+        }
+        always {
+            cleanWs()
         }
     }
 }
