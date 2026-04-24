@@ -8,8 +8,8 @@ pipeline {
     }
 
     environment {
-        CLIENT_ID     = credentials('ANYPOINT_CLIENT_ID')
-        CLIENT_SECRET = credentials('ANYPOINT_CLIENT_SECRET')
+        ANYPOINT_CLIENT_ID     = credentials('ANYPOINT_CLIENT_ID')
+        ANYPOINT_CLIENT_SECRET = credentials('ANYPOINT_CLIENT_SECRET')
     }
 
     stages {
@@ -33,9 +33,9 @@ pipeline {
         stage('Deploy to CloudHub 2.0') {
             steps {
                 bat """
-                    mvn mule:deploy -DmuleDeploy ^
-                    -DconnectedApp.clientId=%CLIENT_ID% ^
-                    -DconnectedApp.clientSecret=%CLIENT_SECRET% ^
+                    mvn clean deploy -DmuleDeploy ^
+                    -DconnectedApp.clientId=%ANYPOINT_CLIENT_ID% ^
+                    -DconnectedApp.clientSecret=%ANYPOINT_CLIENT_SECRET% ^
                     -s settings.xml
                 """
             }
