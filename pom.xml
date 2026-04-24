@@ -39,7 +39,7 @@
                         <applicationName>${project.artifactId}</applicationName>
 
                         <!-- ⚠️ Match your actual env -->
-                        <environment>Sandbox</environment>
+                        <environment>dev</environment>
 
                         <target>Cloudhub-US-East-2</target>
 
@@ -48,8 +48,8 @@
 
                         <businessGroupId>${project.groupId}</businessGroupId>
 
-                        <connectedAppClientId>${env.ANYPOINT_CLIENT_ID}</connectedAppClientId>
-                        <connectedAppClientSecret>${env.ANYPOINT_CLIENT_SECRET}</connectedAppClientSecret>
+                        <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
+                        <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
                         <connectedAppGrantType>client_credentials</connectedAppGrantType>
                     </cloudhub2Deployment>
                 </configuration>
