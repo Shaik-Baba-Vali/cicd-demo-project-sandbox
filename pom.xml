@@ -6,31 +6,21 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Use Business Group ID -->
     <groupId>3265c39d-1b19-4158-828c-58479d052eea</groupId>
     <artifactId>cicd-demo-project-sandbox</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
 
-    <!-- REQUIRED for Exchange -->
     <name>cicd-demo-project-sandbox</name>
 
-    <!-- ================= PROPERTIES ================= -->
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
         <app.runtime>4.10.1</app.runtime>
         <mule.maven.plugin.version>4.6.1</mule.maven.plugin.version>
-
         <skipMunitTests>true</skipMunitTests>
     </properties>
 
-    <!-- ================= BUILD ================= -->
     <build>
         <plugins>
-
-            <!-- Mule Maven Plugin -->
             <plugin>
                 <groupId>org.mule.tools.maven</groupId>
                 <artifactId>mule-maven-plugin</artifactId>
@@ -42,41 +32,35 @@
                     <skipMunitTests>${skipMunitTests}</skipMunitTests>
 
                     <cloudhub2Deployment>
-                        <!-- Anypoint -->
                         <uri>https://anypoint.mulesoft.com</uri>
                         <provider>MC</provider>
 
-                        <!-- App -->
                         <applicationName>${project.artifactId}</applicationName>
 
-                        <!-- MUST match exactly -->
+                        <!-- Environment -->
                         <environment>dev</environment>
 
                         <!-- Region -->
-                        <target>Cloudhub-US-East-1</target>
+                        <target>Cloudhub-US-East-2</target>
 
-                        <!-- Resources -->
                         <replicas>1</replicas>
                         <vCores>0.1</vCores>
 
-                        <!-- Org -->
-                        <businessGroupId>${project.groupId}</businessGroupId>
+                        <!-- ✅ CRITICAL FIX -->
+                        <businessGroupId>3265c39d-1b19-4158-828c-58479d052eea</businessGroupId>
+                        <organizationId>3265c39d-1b19-4158-828c-58479d052eea</organizationId>
 
-                        <!-- AUTH (matches Jenkins params) -->
+                        <!-- Connected App -->
                         <connectedAppClientId>${connectedApp.clientId}</connectedAppClientId>
                         <connectedAppClientSecret>${connectedApp.clientSecret}</connectedAppClientSecret>
                         <connectedAppGrantType>client_credentials</connectedAppGrantType>
-
                     </cloudhub2Deployment>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
-    <!-- ================= DEPENDENCIES ================= -->
     <dependencies>
-
         <dependency>
             <groupId>org.mule.connectors</groupId>
             <artifactId>mule-http-connector</artifactId>
@@ -90,48 +74,34 @@
             <version>1.2.7</version>
             <classifier>mule-plugin</classifier>
         </dependency>
-
     </dependencies>
 
-    <!-- ================= REPOSITORIES ================= -->
     <repositories>
-
         <repository>
             <id>anypoint-exchange-v3</id>
-            <name>Anypoint Exchange</name>
             <url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
         </repository>
 
         <repository>
             <id>mulesoft-releases</id>
-            <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </repository>
-
     </repositories>
 
-    <!-- ================= PLUGIN REPOSITORIES ================= -->
     <pluginRepositories>
-
         <pluginRepository>
             <id>mulesoft-releases</id>
-            <name>MuleSoft Releases</name>
             <url>https://repository.mulesoft.org/releases/</url>
         </pluginRepository>
-
     </pluginRepositories>
 
-    <!-- ================= DISTRIBUTION MANAGEMENT ================= -->
     <distributionManagement>
-
         <repository>
             <id>anypoint-exchange-v3</id>
-            <name>Anypoint Exchange</name>
             <url>
                 https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven
             </url>
         </repository>
-
     </distributionManagement>
 
 </project>
