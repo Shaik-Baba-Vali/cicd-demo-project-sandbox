@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 				<ee:set-payload><![CDATA[%dw 2.0
 output application/json
 ---
-"jenkins cicd completed successfully"]]></ee:set-payload>
+"jenkins cicd demo project completed successfully"]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
